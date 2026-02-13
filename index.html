@@ -34,9 +34,7 @@ align-items:center;
 padding:20px;
 }
 
-#inicio h1{
-font-size:28px;
-}
+#inicio h1{font-size:28px;}
 
 button{
 padding:14px 25px;
@@ -49,11 +47,7 @@ transition:.3s;
 }
 
 #si{background:#ff4b7d;color:white;}
-#no{
-background:#888;
-color:white;
-position:absolute;
-}
+#no{background:#888;color:white;position:absolute;}
 
 /* ===== MAPA ===== */
 #mapaSeccion{
@@ -131,6 +125,9 @@ pointer-events:none;
 position:absolute;
 font-weight:bold;
 color:#b30059;
+background:rgba(255,255,255,0.6);
+padding:5px 10px;
+border-radius:15px;
 animation:caer 8s linear forwards;
 }
 
@@ -171,7 +168,6 @@ max-height:80vh;
 overflow-y:auto;
 }
 
-/* Corazones flotando */
 .corazonFlotando{
 position:fixed;
 bottom:-20px;
@@ -264,28 +260,36 @@ alert("Contraseña incorrecta 💔");
 
 function lluvia(){
 let div=document.getElementById("lluvia");
+div.innerHTML="";
 div.style.display="block";
 
-let palabras=["Jazmín 💖","Te quiero","Eres especial","Siempre tú","Me encantas"];
+let palabras=[
+"Jazmín 💖","Te quiero","Eres especial",
+"Tu sonrisa ilumina","Siempre tú",
+"Me encantas","Eres increíble",
+"Mi persona favorita","Gracias por existir",
+"Abrazote 🤍"
+];
 
-for(let i=0;i<150;i++){
+for(let i=0;i<60;i++){
 let p=document.createElement("div");
 p.classList.add("palabra");
 p.innerText=palabras[Math.floor(Math.random()*palabras.length)];
-p.style.left=Math.random()*100+"vw";
-p.style.animationDelay=Math.random()*5+"s";
-p.style.fontSize=(14+Math.random()*14)+"px";
+p.style.left=Math.random()*90+"vw";
+p.style.animationDelay=(Math.random()*6)+"s";
+p.style.fontSize=(16+Math.random()*12)+"px";
 div.appendChild(p);
 }
 
 setTimeout(()=>{
 div.style.display="none";
 mostrarCorazon();
-},9000);
+},10000);
 }
 
 function mostrarCorazon(){
 let div=document.getElementById("corazon");
+div.innerText="";
 div.style.display="block";
 
 let lineas=[
@@ -310,9 +314,9 @@ clearInterval(intervalo);
 setTimeout(()=>{
 div.style.display="none";
 mostrarCarta();
-},2000);
+},2500);
 }
-},600);
+},700);
 }
 
 function mostrarCarta(){
@@ -320,6 +324,7 @@ let carta=document.getElementById("cartaFinal");
 carta.style.display="block";
 
 let texto=`Holaaaaaaaaaa 💌
+
 Ya sé que es demasiado tarde para preguntarte si quieres ser mi San Valentín…
 pero aun así quería decírtelo. No es solo por la fecha,
 es porque eres una gran chica, alguien muy especial para mí,
@@ -340,11 +345,13 @@ por tu forma de ser, por tu corazón.
 No te escribo para presionarte,
 solo para que sepas que alguien te quiere bonito,
 con respeto y con verdad.
-Con mucho cariño
+
+Con mucho cariño  
 YOOOOO 💖`;
 
 let i=0;
 let elemento=document.getElementById("textoCarta");
+elemento.innerHTML="";
 
 let escribir=setInterval(()=>{
 if(i<texto.length){
@@ -354,16 +361,16 @@ i++;
 clearInterval(escribir);
 corazonesFlotando();
 }
-},25);
+},20);
 }
 
 function corazonesFlotando(){
-for(let i=0;i<30;i++){
+for(let i=0;i<20;i++){
 let corazon=document.createElement("div");
 corazon.classList.add("corazonFlotando");
 corazon.innerHTML="💖";
 corazon.style.left=Math.random()*100+"vw";
-corazon.style.animationDuration=(4+Math.random()*4)+"s";
+corazon.style.animationDuration=(5+Math.random()*4)+"s";
 document.body.appendChild(corazon);
 }
 }
