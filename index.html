@@ -24,7 +24,8 @@ overflow-x:hidden;
 100%{background-position:0% 50%}
 }
 
-.seccion{
+/* ===== INICIO ===== */
+#inicio{
 min-height:100vh;
 display:flex;
 flex-direction:column;
@@ -33,23 +34,45 @@ align-items:center;
 padding:20px;
 }
 
-/* BOTONES */
+#inicio h1{
+font-size:28px;
+}
+
 button{
 padding:14px 25px;
 border:none;
 border-radius:30px;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
 margin:10px;
 transition:.3s;
 }
 
 #si{background:#ff4b7d;color:white;}
-#no{background:#888;color:white;position:absolute;}
+#no{
+background:#888;
+color:white;
+position:absolute;
+}
 
-/* MAPA */
-#mapaSeccion{display:none;}
-svg{width:100%;max-width:350px;}
+/* ===== MAPA ===== */
+#mapaSeccion{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.4);
+backdrop-filter:blur(15px);
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(0,0,0,0.2);
+width:90%;
+max-width:350px;
+}
+
+svg{width:100%;}
+
 .ruta{
 stroke:#ff4b7d;
 stroke-width:4;
@@ -57,15 +80,28 @@ stroke-dasharray:400;
 stroke-dashoffset:400;
 animation:dibujar 6s forwards;
 }
-@keyframes dibujar{to{stroke-dashoffset:0;}}
 
-/* LOGIN */
+@keyframes dibujar{
+to{stroke-dashoffset:0;}
+}
+
+/* ===== LOGIN ===== */
 #loginSeccion{
 display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,0,0,0.2);
+width:90%;
+max-width:350px;
 }
-input{
+
+#loginSeccion input{
 width:100%;
-max-width:300px;
 padding:12px;
 border-radius:12px;
 border:1px solid #ff4b7d;
@@ -73,74 +109,82 @@ margin:15px 0;
 font-size:16px;
 }
 
-/* LLUVIA */
+#loginSeccion button{
+width:100%;
+background:#ff4b7d;
+color:white;
+}
+
+/* ===== LLUVIA ===== */
 #lluvia{
 position:fixed;
 top:0;
 left:0;
 width:100%;
-height:100%;
-pointer-events:none;
-display:none;
+height:100vh;
 overflow:hidden;
+display:none;
+pointer-events:none;
 }
 
 .palabra{
 position:absolute;
 font-weight:bold;
 color:#b30059;
-animation:caer 7s linear forwards;
+animation:caer 8s linear forwards;
 }
 
 @keyframes caer{
-0%{transform:translateY(-50px);opacity:0;}
+0%{transform:translateY(-100px);opacity:0;}
 100%{transform:translateY(110vh);opacity:1;}
 }
 
-/* CORAZÓN */
+/* ===== CORAZÓN ===== */
 #corazon{
 display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 white-space:pre;
 font-family:monospace;
 font-size:20px;
-margin-top:30px;
+color:#c7005d;
 }
 
-/* CARTA */
+/* ===== CARTA FINAL ===== */
 #cartaFinal{
 display:none;
-padding:25px;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+max-width:400px;
 background:white;
+padding:25px;
 border-radius:20px;
-box-shadow:0 0 30px rgba(0,0,0,0.2);
-margin:20px;
-max-width:500px;
+box-shadow:0 0 40px rgba(0,0,0,0.3);
 text-align:left;
 line-height:1.6;
-animation:fadeIn 1.5s ease forwards;
+max-height:80vh;
+overflow-y:auto;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-/* CORAZONES FLOTANDO */
+/* Corazones flotando */
 .corazonFlotando{
 position:fixed;
 bottom:-20px;
+color:#ff4b7d;
 font-size:18px;
 animation:flotar 6s linear infinite;
 }
 
 @keyframes flotar{
-0%{transform:translateY(0);opacity:0;}
-30%{opacity:1;}
-100%{transform:translateY(-110vh);opacity:0;}
+0%{transform:translateY(0) scale(0.5);opacity:0;}
+50%{opacity:1;}
+100%{transform:translateY(-110vh) scale(1.2);opacity:0;}
 }
-
-h1{font-size:28px;}
-h2{font-size:22px;}
 
 </style>
 </head>
@@ -150,47 +194,37 @@ h2{font-size:22px;}
 <source src="amar.mp3" type="audio/mpeg">
 </audio>
 
-<!-- INICIO -->
-<div class="seccion" id="inicio">
+<div id="inicio">
 <h1>¿Quieres ser mi San Valentín? 💖</h1>
 <button id="si">Sí 💖</button>
 <button id="no">No 😢</button>
 </div>
 
-<!-- MAPA -->
-<div class="seccion" id="mapaSeccion">
+<div id="mapaSeccion">
 <h2>Desde Toluca hasta Monterrey 💖</h2>
 <svg viewBox="0 0 300 200">
 <path d="M20,50 L80,40 L120,60 L180,50 L250,80 L220,140 L150,150 L90,130 L40,100 Z"
 fill="#ffe0ec" stroke="#ff4b7d" stroke-width="2"/>
 <circle cx="80" cy="100" r="6" fill="red"/>
-<text x="60" y="120" font-size="12">Toluca</text>
+<text x="60" y="120" font-size="10">Toluca</text>
 <circle cx="200" cy="70" r="6" fill="red"/>
-<text x="170" y="60" font-size="12">Monterrey</text>
+<text x="170" y="60" font-size="10">Monterrey</text>
 <line x1="80" y1="100" x2="200" y2="70" class="ruta"/>
 </svg>
 </div>
 
-<!-- LOGIN -->
-<div class="seccion" id="loginSeccion">
+<div id="loginSeccion">
 <h2>Ingresa la contraseña 💖</h2>
 <input type="password" id="pass" placeholder="Contraseña">
 <button onclick="verificar()">Entrar</button>
 </div>
 
 <div id="lluvia"></div>
-
-<!-- CORAZÓN -->
-<div class="seccion">
 <div id="corazon"></div>
-</div>
 
-<!-- CARTA -->
-<div class="seccion">
 <div id="cartaFinal">
 <h2>Para Jazmín 💖</h2>
 <p id="textoCarta"></p>
-</div>
 </div>
 
 <script>
@@ -199,24 +233,24 @@ const si=document.getElementById("si");
 const no=document.getElementById("no");
 const musica=document.getElementById("musica");
 
-no.addEventListener("touchstart",moverNo);
-no.addEventListener("mouseover",moverNo);
-
 function moverNo(){
 no.style.top=Math.random()*80+"%";
 no.style.left=Math.random()*80+"%";
 si.style.transform="scale(1.1)";
 }
 
+no.addEventListener("mouseover",moverNo);
+no.addEventListener("touchstart",moverNo);
+
 si.addEventListener("click",()=>{
 musica.play();
 document.getElementById("inicio").style.display="none";
-document.getElementById("mapaSeccion").style.display="flex";
+document.getElementById("mapaSeccion").style.display="block";
 
 setTimeout(()=>{
 document.getElementById("mapaSeccion").style.display="none";
-document.getElementById("loginSeccion").style.display="flex";
-},6000);
+document.getElementById("loginSeccion").style.display="block";
+},7000);
 });
 
 function verificar(){
@@ -234,11 +268,12 @@ div.style.display="block";
 
 let palabras=["Jazmín 💖","Te quiero","Eres especial","Siempre tú","Me encantas"];
 
-for(let i=0;i<80;i++){
+for(let i=0;i<150;i++){
 let p=document.createElement("div");
 p.classList.add("palabra");
 p.innerText=palabras[Math.floor(Math.random()*palabras.length)];
 p.style.left=Math.random()*100+"vw";
+p.style.animationDelay=Math.random()*5+"s";
 p.style.fontSize=(14+Math.random()*14)+"px";
 div.appendChild(p);
 }
@@ -246,7 +281,7 @@ div.appendChild(p);
 setTimeout(()=>{
 div.style.display="none";
 mostrarCorazon();
-},8000);
+},9000);
 }
 
 function mostrarCorazon(){
@@ -254,13 +289,15 @@ let div=document.getElementById("corazon");
 div.style.display="block";
 
 let lineas=[
-"   JAZ     JAZ",
-" JAZ JAZ JAZ JAZ",
-"JAZ JAZ JAZ JAZ JAZ",
-" JAZ JAZ JAZ JAZ",
-"   JAZ JAZ JAZ",
-"     JAZ JAZ",
-"       JAZ"
+"        JAZ       JAZ",
+"     JAZ JAZ   JAZ JAZ",
+"   JAZ JAZ JAZ JAZ JAZ",
+"  JAZ JAZ JAZ JAZ JAZ JAZ",
+"   JAZ JAZ JAZ JAZ JAZ",
+"     JAZ JAZ JAZ JAZ",
+"        JAZ JAZ JAZ",
+"          JAZ JAZ",
+"            JAZ"
 ];
 
 let i=0;
@@ -270,9 +307,12 @@ div.innerText+=lineas[i]+"\n";
 i++;
 }else{
 clearInterval(intervalo);
-setTimeout(mostrarCarta,2000);
+setTimeout(()=>{
+div.style.display="none";
+mostrarCarta();
+},2000);
 }
-},500);
+},600);
 }
 
 function mostrarCarta(){
@@ -280,22 +320,7 @@ let carta=document.getElementById("cartaFinal");
 carta.style.display="block";
 
 let texto=`Holaaaaaaaaaa 💌
-
-Ya sé que es demasiado tarde para preguntarte si quieres ser mi San Valentín…
-pero aun así quería decírtelo. No es solo por la fecha,
-es porque eres una gran chica, alguien muy especial para mí,
-y te quiero muchote uchote.
-
-Sé que la distancia no ayuda, pero lo que siento no cambia por los kilómetros.
-Desde Toluca hasta Monterrey cruzaría cualquier distancia solo para verte sonreír.
-
-También sé que estás pasando por un momento difícil,
-pero quiero que sepas que cuentas conmigo.
-
-No te escribo para presionarte,
-solo para que sepas que alguien te quiere bonito,
-con respeto y con verdad.
-
+...
 Con mucho cariño
 YOOOOO 💖`;
 
@@ -308,19 +333,19 @@ elemento.innerHTML+=texto.charAt(i);
 i++;
 }else{
 clearInterval(escribir);
-corazones();
+corazonesFlotando();
 }
 },25);
 }
 
-function corazones(){
-for(let i=0;i<20;i++){
-let c=document.createElement("div");
-c.classList.add("corazonFlotando");
-c.innerHTML="💖";
-c.style.left=Math.random()*100+"vw";
-c.style.animationDuration=(4+Math.random()*4)+"s";
-document.body.appendChild(c);
+function corazonesFlotando(){
+for(let i=0;i<30;i++){
+let corazon=document.createElement("div");
+corazon.classList.add("corazonFlotando");
+corazon.innerHTML="💖";
+corazon.style.left=Math.random()*100+"vw";
+corazon.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(corazon);
 }
 }
 
