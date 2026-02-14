@@ -10,12 +10,12 @@
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background:linear-gradient(-45deg,#ffd6e0,#ffeef3,#fff,#ffd6e0);
+background:linear-gradient(135deg,#ffcce6,#ffd9ec,#ffe6f5,#fff0f9);
 background-size:400% 400%;
 animation:fondo 20s ease infinite;
 text-align:center;
-color:#9b004d;
-overflow-x:hidden;
+color:#a1005a;
+overflow:hidden;
 }
 
 @keyframes fondo{
@@ -24,7 +24,36 @@ overflow-x:hidden;
 100%{background-position:0% 50%}
 }
 
-/* ===== INICIO ===== */
+/* ✨ Brillos */
+.brillo{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:0.6;
+animation:flotarBrillo 6s linear infinite;
+}
+
+@keyframes flotarBrillo{
+0%{transform:translateY(100vh);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* 🌸 Pétalos */
+.petalo{
+position:fixed;
+font-size:18px;
+animation:caerPetalo 8s linear infinite;
+}
+
+@keyframes caerPetalo{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* INICIO */
 #inicio{
 min-height:100vh;
 display:flex;
@@ -34,109 +63,125 @@ align-items:center;
 padding:20px;
 }
 
-#inicio h1{font-size:28px;}
-
 button{
-padding:14px 25px;
+padding:14px 28px;
 border:none;
 border-radius:30px;
 font-size:16px;
 cursor:pointer;
 margin:10px;
 transition:.3s;
+box-shadow:0 0 20px rgba(255,105,180,0.4);
 }
 
-#si{background:#ff4b7d;color:white;}
-#no{background:#888;color:white;position:absolute;}
+#si{background:#ff4da6;color:white;}
+#si:hover{transform:scale(1.1);}
+#no{background:#d87093;color:white;position:absolute;}
 
-/* ===== MAPA ===== */
-#mapaSeccion{
+/* MAPA */
+#viaje{
 display:none;
 position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+z-index:10;
+}
+
+#mapaContainer{
+position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(255,255,255,0.4);
-backdrop-filter:blur(15px);
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 40px rgba(0,0,0,0.2);
 width:90%;
-max-width:350px;
+max-width:500px;
 }
 
-svg{width:100%;}
+#mapaSVG{width:100%;}
+
+.ciudad{fill:#ff1493;}
 
 .ruta{
-stroke:#ff4b7d;
+fill:none;
+stroke:#ff69b4;
 stroke-width:4;
-stroke-dasharray:400;
-stroke-dashoffset:400;
-animation:dibujar 6s forwards;
+stroke-dasharray:600;
+stroke-dashoffset:600;
+animation:dibujar 25s linear forwards;
 }
 
-@keyframes dibujar{
-to{stroke-dashoffset:0;}
+@keyframes dibujar{to{stroke-dashoffset:0;}}
+
+#avion{
+position:absolute;
+font-size:28px;
+offset-rotate:auto;
+animation:volar 25s linear forwards;
 }
 
-/* ===== LOGIN ===== */
+@keyframes volar{
+0%{offset-distance:0%;}
+100%{offset-distance:100%;}
+}
+
+/* LOGIN */
 #loginSeccion{
 display:none;
 position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:white;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(15px);
 padding:30px;
-border-radius:20px;
-box-shadow:0 0 30px rgba(0,0,0,0.2);
+border-radius:25px;
+box-shadow:0 0 50px rgba(255,105,180,0.4);
 width:90%;
 max-width:350px;
+z-index:20;
 }
 
 #loginSeccion input{
 width:100%;
 padding:12px;
 border-radius:12px;
-border:1px solid #ff4b7d;
+border:1px solid #ff4da6;
 margin:15px 0;
 font-size:16px;
 }
 
-#loginSeccion button{
-width:100%;
-background:#ff4b7d;
-color:white;
-}
-
-/* ===== LLUVIA ===== */
+/* LLUVIA */
 #lluvia{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100vh;
-overflow:hidden;
 display:none;
+overflow:hidden;
 pointer-events:none;
+z-index:15;
 }
 
 .palabra{
 position:absolute;
 font-weight:bold;
-color:#b30059;
-background:rgba(255,255,255,0.6);
-padding:5px 10px;
-border-radius:15px;
-animation:caer 8s linear forwards;
+color:#c71585;
+background:rgba(255,255,255,0.8);
+padding:6px 12px;
+border-radius:20px;
+animation:caer 9s linear forwards;
 }
 
 @keyframes caer{
-0%{transform:translateY(-100px);opacity:0;}
-100%{transform:translateY(110vh);opacity:1;}
+0%{transform:translateY(-100px);opacity:0}
+100%{transform:translateY(110vh);opacity:1}
 }
 
-/* ===== CORAZÓN ===== */
+/* CORAZÓN */
 #corazon{
 display:none;
 position:fixed;
@@ -145,11 +190,13 @@ left:50%;
 transform:translate(-50%,-50%);
 white-space:pre;
 font-family:monospace;
-font-size:20px;
-color:#c7005d;
+font-size:18px;
+color:#ff1493;
+text-shadow:0 0 15px #ff69b4;
+z-index:20;
 }
 
-/* ===== CARTA FINAL ===== */
+/* CARTA */
 #cartaFinal{
 display:none;
 position:fixed;
@@ -157,56 +204,65 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 width:90%;
-max-width:400px;
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 0 40px rgba(0,0,0,0.3);
-text-align:left;
-line-height:1.6;
+max-width:430px;
+background:rgba(255,255,255,0.9);
+padding:30px;
+border-radius:30px;
+box-shadow:0 0 60px rgba(255,105,180,0.5);
+line-height:1.8;
 max-height:80vh;
 overflow-y:auto;
+white-space:pre-line;
+z-index:25;
 }
 
 .corazonFlotando{
 position:fixed;
 bottom:-20px;
-color:#ff4b7d;
 font-size:18px;
 animation:flotar 6s linear infinite;
 }
 
 @keyframes flotar{
-0%{transform:translateY(0) scale(0.5);opacity:0;}
-50%{opacity:1;}
-100%{transform:translateY(-110vh) scale(1.2);opacity:0;}
+0%{transform:translateY(0) scale(0.5);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-110vh) scale(1.2);opacity:0}
 }
 
 </style>
 </head>
 <body>
 
-<audio id="musica" loop>
-<source src="amar.mp3" type="audio/mpeg">
+<audio id="musica" autoplay loop>
+<source src="12.mp3" type="audio/mpeg">
 </audio>
 
 <div id="inicio">
-<h1>¿Quieres ser mi San Valentín? 💖</h1>
+<h1>¿Quieres ser mi San Valentín, Jazmín? 💖</h1>
 <button id="si">Sí 💖</button>
 <button id="no">No 😢</button>
 </div>
 
-<div id="mapaSeccion">
-<h2>Desde Toluca hasta Monterrey 💖</h2>
-<svg viewBox="0 0 300 200">
-<path d="M20,50 L80,40 L120,60 L180,50 L250,80 L220,140 L150,150 L90,130 L40,100 Z"
-fill="#ffe0ec" stroke="#ff4b7d" stroke-width="2"/>
-<circle cx="80" cy="100" r="6" fill="red"/>
-<text x="60" y="120" font-size="10">Toluca</text>
-<circle cx="200" cy="70" r="6" fill="red"/>
-<text x="170" y="60" font-size="10">Monterrey</text>
-<line x1="80" y1="100" x2="200" y2="70" class="ruta"/>
+<!-- MAPA VIAJE -->
+<div id="viaje">
+<div id="mapaContainer">
+<svg id="mapaSVG" viewBox="0 0 500 300">
+
+<path d="M50 50 L450 60 L430 250 L80 240 Z" fill="#ffe6f2"/>
+
+<path id="trayectoria"
+d="M120 200 C200 120, 300 80, 380 120"
+class="ruta"/>
+
+<circle cx="120" cy="200" r="6" class="ciudad"/>
+<text x="90" y="220" font-size="12" fill="#a1005a">Toluca</text>
+
+<circle cx="380" cy="120" r="6" class="ciudad"/>
+<text x="345" y="105" font-size="12" fill="#a1005a">Monterrey</text>
+
 </svg>
+<div id="avion">✈️</div>
+</div>
 </div>
 
 <div id="loginSeccion">
@@ -229,24 +285,27 @@ const si=document.getElementById("si");
 const no=document.getElementById("no");
 const musica=document.getElementById("musica");
 
+document.addEventListener("click",()=>musica.play(),{once:true});
+
 function moverNo(){
 no.style.top=Math.random()*80+"%";
 no.style.left=Math.random()*80+"%";
-si.style.transform="scale(1.1)";
 }
-
 no.addEventListener("mouseover",moverNo);
 no.addEventListener("touchstart",moverNo);
 
 si.addEventListener("click",()=>{
-musica.play();
 document.getElementById("inicio").style.display="none";
-document.getElementById("mapaSeccion").style.display="block";
+document.getElementById("viaje").style.display="block";
+
+const avion=document.getElementById("avion");
+const trayectoria=document.getElementById("trayectoria");
+avion.style.offsetPath=`path('${trayectoria.getAttribute("d")}')`;
 
 setTimeout(()=>{
-document.getElementById("mapaSeccion").style.display="none";
+document.getElementById("viaje").style.display="none";
 document.getElementById("loginSeccion").style.display="block";
-},7000);
+},25000);
 });
 
 function verificar(){
@@ -263,33 +322,25 @@ let div=document.getElementById("lluvia");
 div.innerHTML="";
 div.style.display="block";
 
-let palabras=[
-"Jazmín 💖","Te quiero","Eres especial",
-"Tu sonrisa ilumina","Siempre tú",
-"Me encantas","Eres increíble",
-"Mi persona favorita","Gracias por existir",
-"Abrazote 🤍"
-];
+let palabras=["Jazmín 💖","Te quiero","Eres especial","Siempre tú","Mi persona favorita","Gracias por existir","Contigo todo es mejor"];
 
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
 let p=document.createElement("div");
 p.classList.add("palabra");
 p.innerText=palabras[Math.floor(Math.random()*palabras.length)];
-p.style.left=Math.random()*90+"vw";
+p.style.left=Math.random()*100+"vw";
 p.style.animationDelay=(Math.random()*6)+"s";
-p.style.fontSize=(16+Math.random()*12)+"px";
 div.appendChild(p);
 }
 
 setTimeout(()=>{
 div.style.display="none";
 mostrarCorazon();
-},10000);
+},11000);
 }
 
 function mostrarCorazon(){
 let div=document.getElementById("corazon");
-div.innerText="";
 div.style.display="block";
 
 let lineas=[
@@ -314,9 +365,9 @@ clearInterval(intervalo);
 setTimeout(()=>{
 div.style.display="none";
 mostrarCarta();
-},2500);
+},3000);
 }
-},700);
+},600);
 }
 
 function mostrarCarta(){
@@ -326,28 +377,34 @@ carta.style.display="block";
 let texto=`Holaaaaaaaaaa 💌
 
 Ya sé que es demasiado tarde para preguntarte si quieres ser mi San Valentín…
-pero aun así quería decírtelo. No es solo por la fecha,
+pero aun así quería decírtelo queria que fuera espesial este detallito . No es solo por la fecha,
 es porque eres una gran chica, alguien muy especial para mí,
 y te quiero muchote uchote.
 
-Sé que la distancia no ayuda, ¿verdad? A veces complica las cosas y hace que todo se sienta más lejos…
-pero lo que siento no cambia por los kilómetros. Desde Toluca hasta Monterrey cruzaría cualquier distancia solo para verte sonreír.
+Sé que la distancia no ayuda, ¿verdad? A veces complica 
+las cosas y hace que todo se sienta más lejos… pero lo que 
+siento no cambia por los kilómetros. Desde hasta cruzaría 
+cualquier distancia solo para verte sonreír. No importa el lugar, 
+siempre tendrás un detalle de mi parte, algo que te recuerde que
+ estoy pensando en ti.
 
 También sé que estás pasando por un momento difícil, una racha mala,
-y aunque no siempre tenga las palabras perfectas,
-quiero que sepas que cuentas conmigo.
-No eres espectadora en tu propia historia,
-eres la protagonista.
+ y aunque no siempre tenga las palabras perfectas, quiero que
+  sepas que cuentas conmigo. No eres espectadora en tu propia 
+  historia, eres la protagonista, incluso en los días en los
+   que todo parece pesado o confuso y obvio tenias que resivir algo el 14 jeje
 
-Me importas por quien eres,
-por tu forma de ser, por tu corazón.
+Me importas por quien eres, por tu forma de ser
+, por tu corazón. Y aunque no pueda estar ahí físicamente,
+ quiero acompañarte con cariño, con apoyo y con la intención
+  sincera de verte bien.
 
-No te escribo para presionarte,
-solo para que sepas que alguien te quiere bonito,
-con respeto y con verdad.
+No te escribo para presionarte, solo para que sepas que 
+alguien te quiere bonito, con respeto y con verdad.
 
-Con mucho cariño  
-YOOOOO 💖`;
+Con mucho cariño     YOOOOO
+perdon por la hora el desayuno llego algo tarde jiiijji
+espero y te guste cuidate mucho abrazos)`;
 
 let i=0;
 let elemento=document.getElementById("textoCarta");
@@ -361,21 +418,40 @@ i++;
 clearInterval(escribir);
 corazonesFlotando();
 }
-},20);
+},18);
 }
 
 function corazonesFlotando(){
-for(let i=0;i<20;i++){
-let corazon=document.createElement("div");
-corazon.classList.add("corazonFlotando");
-corazon.innerHTML="💖";
-corazon.style.left=Math.random()*100+"vw";
-corazon.style.animationDuration=(5+Math.random()*4)+"s";
-document.body.appendChild(corazon);
+for(let i=0;i<35;i++){
+let c=document.createElement("div");
+c.classList.add("corazonFlotando");
+c.innerHTML="💖";
+c.style.left=Math.random()*100+"vw";
+c.style.animationDuration=(5+Math.random()*4)+"s";
+document.body.appendChild(c);
 }
 }
 
+/* brillos y pétalos */
+for(let i=0;i<30;i++){
+let b=document.createElement("div");
+b.classList.add("brillo");
+b.style.left=Math.random()*100+"vw";
+b.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(b);
+}
+
+for(let i=0;i<15;i++){
+let p=document.createElement("div");
+p.classList.add("petalo");
+p.innerHTML="🌸";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(6+Math.random()*4)+"s";
+document.body.appendChild(p);
+}
+
 </script>
+
 </body>
 </html>
 
